@@ -23,4 +23,4 @@ console.log(store.getState());
 
 
 
-ReactDOM.render(<AppRouter/>, document.getElementById('app'));
+ReactDOM.render(<AppRouter />, document.getElementById('app'));
