@@ -1,5 +1,5 @@
 // Higher Order Component (HOC) - A Component (HOC) that renders another Component
-// Reuse code
+// Goal: Reuse code
 // Render hijacking
 // Prop manipulation
 // Abstract state
@@ -23,7 +23,25 @@ const withAdminWarning = (WrappedComponent) => {
     );
 };
 
+
+// requireAuthentication --> this is just a function that returns the HOC
+const requireAuthentication = (WrappedComponent) => {
+    return (props) => (
+        <div>
+            {props.isAuthenticated ? (
+                <WrappedComponent {...props}/>
+            ) : (
+                <p>Please login to view the info</p>
+            )}
+        </div>
+    );
+};
+
+
+
 const AdminInfo = withAdminWarning(Info);
+const AuthInfo = requireAuthentication(Info)
 
 
-ReactDOM.render(<AdminInfo isAdmin={true} info={"There are the details"} />, document.getElementById('app'));
+// ReactDOM.render(<AdminInfo isAdmin={true} info={"There are the details"} />, document.getElementById('app'));
+ReactDOM.render(<AuthInfo isAuthenticated={true} info={"There are the details"} />, document.getElementById('app'));
